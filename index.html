@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">HealthStream Dashboard</div>
+    <div class="filters">
+      <label>
+        Facility
+        <select id="facilityFilter"></select>
+      </label>
+      <label>
+        Department
+        <select id="departmentFilter"></select>
+      </label>
+      <label>
+        Time Range
+        <select id="timeRangeFilter">
+          <option value="24h">Last 24h</option>
+          <option value="7d" selected>Last 7 days</option>
+          <option value="30d">Last 30 days</option>
+        </select>
+      </label>
+    </div>
+    <div class="live-indicator" role="status" aria-live="polite">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <div>
+        <div class="live-label">Mock live stream</div>
+        <div class="live-time" id="lastUpdated">Initializing</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <h3>Total Patients</h3>
+        <p class="kpi-value" id="totalPatients">-</p>
+        <p class="kpi-sub" id="admitDischargeRatio">Admit vs Discharge</p>
+      </div>
+      <div class="kpi-card">
+        <h3>Average LOS (days)</h3>
+        <p class="kpi-value" id="avgLos">-</p>
+        <p class="kpi-sub">Length of Stay</p>
+      </div>
+      <div class="kpi-card">
+        <h3>Bed Occupancy</h3>
+        <p class="kpi-value" id="bedOccupancy">-</p>
+        <p class="kpi-sub">of staffed beds</p>
+      </div>
+      <div class="kpi-card">
+        <h3>Readmission Rate</h3>
+        <p class="kpi-value" id="readmissionRate">-</p>
+        <p class="kpi-sub">within 30 days</p>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel" aria-label="Patient volume by day">
+        <div class="panel-header">
+          <h2>Patient Volume</h2>
+          <span class="panel-subtitle" id="volumeSubtitle"></span>
+        </div>
+        <div class="chart" id="volumeChart"></div>
+      </section>
+
+      <section class="panel" aria-label="Queue and throughput">
+        <div class="panel-header">
+          <h2>Flow & Throughput</h2>
+        </div>
+        <div class="split">
+          <div>
+            <h3>Current Queue</h3>
+            <ul class="metric-list">
+              <li><span>ED Waiting</span><span id="edWaiting">-</span></li>
+              <li><span>Pending Admissions</span><span id="pendingAdmissions">-</span></li>
+              <li><span>OR Cases Today</span><span id="orCases">-</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Throughput (Last 24h)</h3>
+            <ul class="metric-list">
+              <li><span>Admissions</span><span id="throughputAdmissions">-</span></li>
+              <li><span>Discharges</span><span id="throughputDischarges">-</span></li>
+              <li><span>Transfers</span><span id="throughputTransfers">-</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-wide" aria-label="Patient level detail">
+        <div class="panel-header">
+          <h2>Patient Detail (Mock Streamline Data)</h2>
+          <span class="panel-subtitle">Showing top 10 inpatients by risk score</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>MRN</th>
+                <th>Patient</th>
+                <th>Facility</th>
+                <th>Department</th>
+                <th>Admit Dt</th>
+                <th>LOS</th>
+                <th>Risk</th>
+                <th>Primary Dx</th>
+              </tr>
+            </thead>
+            <tbody id="patientTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Mock healthcare data for demo purposes only. Not real patient information.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
